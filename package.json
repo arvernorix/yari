@@ -1,0 +1,39 @@
+{
+  "name": "yari",
+  "version": "0.0.0",
+  "description": "Just a simple MongoDB object modeling library",
+  "author": "Meo <meo@lozi.vn> (http://arvernorix.com)",
+  "contributors": [
+    "Meo <meo@lozi.vn> (http://arvernorix.com)"
+  ],
+  "keywords": [
+    "mongo",
+    "mongodb",
+    "model"
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://en.wikipedia.org/wiki/MIT_License"
+    }
+  ],
+  "dependencies": {},
+  "devDependencies": {},
+  "main": "./lib/yari.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "engines": [
+    {
+      "node": ">= 0.8.0"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/arvernorix/yari.git"
+  },
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/arvernorix/yari/issues"
+  }
+}
