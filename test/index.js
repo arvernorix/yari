@@ -57,7 +57,8 @@ yari.connect()
                 nameOrder: {
                     type: [{
                         type: String,
-                        enum: this.nameOrder.enum
+                        enum: this.nameOrder.enum,
+                        translate: this.nameOrder.translate
                     }],
                     required: true,
                     // validators: validator.validateNameOrder
@@ -66,6 +67,7 @@ yari.connect()
                 gender: {
                     type: String,
                     enum: this.gender.enum,
+                    translate: this.gender.translate,
                     required: true
                 },
                 birthday: Date,
@@ -110,7 +112,8 @@ yari.connect()
                 roles: [{
                     type: String,
                     humanized: 'role',
-                    enum: this.roles.enum
+                    enum: this.roles.enum,
+                    translate: this.roles.translate,
                 }],
 
                 lastLoginAt: {
@@ -124,12 +127,11 @@ yari.connect()
             this.plugin('timestampable');
 
             this.get('name', function () {
-                var self = this,
-                    parts = [];
+                var parts = [];
 
                 this.nameOrder.forEach(function (part) {
-                    parts.push(self[part + 'Name']);
-                });
+                    parts.push(this[part + 'Name']);
+                }, this);
 
                 return parts.join(' ');
             });
@@ -143,8 +145,26 @@ yari.connect()
         var User = yari.modelize('user', UserCreator),
             user = new User({
                 username: 'Damn It!',
-                roles: [ 'user', 1 ]
+                roles: [ 'user', 1 ],
+                lastLoginAt: new Date
             });
+
+        User.findByIds([
+                '5305352151d93a361428ce28',
+                '5305352351d93a361428ce29',
+                '5305352451d93a361428ce2a',
+                '5305352551d93a361428ce2b'
+            ])
+            .exec()
+            .then(function (users) {
+                console.dir(users);
+            });
+
+        console.log(user.lastLoginAt);
+        setTimeout(function () {
+            user.touchLastLogin();
+            console.log(user.lastLoginAt);
+        }, 5000);
 
         user.validate()
             .then(function (errs) {
